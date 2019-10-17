@@ -4,11 +4,11 @@
   "description": "Logging for Adobe ExtendScript capable applications.",
   "main": "index.jsx",
   "scripts": {
-    "test": "tests/run"
+    "test": "test/run"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theasci/extendscript-logger.git"
+    "url": "https://github.com/theasci/extendscript-logger.git"
   },
   "keywords": [
     "adobe",
