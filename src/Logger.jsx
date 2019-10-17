@@ -2,10 +2,9 @@
  * Handles logging messages to different sources. Creates log in hosts/log/ directory.
  * @see https://github.com/sidpalas/extendscript-logging
  *
- * var logger = Logger('DEBUG','~/mylog.log');
+ * var logger = new Logger('~/mylog.log','DEBUG');
  */
-var Logger = function(severity, logPath){
-	this.name = arguments.callee.name;
+var Logger = (function(logPath, severity){
 	this.lastLog = null;
 	this.logId = 1;
 	this.separator = '|';
@@ -17,8 +16,8 @@ var Logger = function(severity, logPath){
 		'ERROR',
 		'CRITICAL'
 	];
-	this.severity = severity ? severity : 'INFO';
 	this.logPath = logPath ? logPath : '/tmp/'+moment().format('YYYYMMDDHms')+'.log';
+	this.severity = severity ? severity : 'DEBUG';
 
 	this.debug = function(message) {
 		return this.log(message, 'DEBUG');
@@ -103,7 +102,7 @@ var Logger = function(severity, logPath){
 	
 	this.log = function(message, severity) {
 		if(this.levels.indexOf(severity) == -1) {
-			throw new TypeError('Severity '+severity+' is not one of Logger.levels');
+			throw new TypeError('Severity '+severity+' is not one of extendscript-logger.levels');
 		}
 		
 		if(!this.meetsSeverity(severity)) {
@@ -130,4 +129,4 @@ var Logger = function(severity, logPath){
 	}
 	
 	return this;
-}
+}());

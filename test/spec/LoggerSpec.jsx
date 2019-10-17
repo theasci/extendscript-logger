@@ -4,7 +4,7 @@ describe('Logger', function() {
 	var logPath = rootPath+'/log/debugLogger.log'
 	
 	beforeEach(function(){
-		debugLogger = new Logger('DEBUG', logPath);
+		debugLogger = new Logger(logPath);
 		debugLogger.delete(); //ensures log is kept small
 	});
 
@@ -30,7 +30,7 @@ describe('Logger', function() {
 				expect(dir.exists).toBe(false);
 				
 				var fooPath = dir.fullName+'/foo.log';
-				var fooLogger = new Logger('DEBUG', fooPath);
+				var fooLogger = new Logger(fooPath);
 				expect(fooLogger.file().fullName).toEqual(fooPath);
 				expect(dir.exists).toBe(true);
 				expect(new Folder(dir.fullName).exists).toBe(true);
@@ -89,7 +89,7 @@ describe('Logger', function() {
 			expect(debugLogger.log('debug','DEBUG')).toBe(true);
 			expect(debugLogger.log('info','INFO')).toBe(true);
 		
-			var infoLogger = new Logger('INFO', 'infoLogger.log');
+			var infoLogger = new Logger('infoLogger.log', 'INFO');
 			expect(infoLogger.log('debug','DEBUG')).toBe(false);
 			expect(infoLogger.log('info','INFO')).toBe(true);
 			infoLogger.delete();

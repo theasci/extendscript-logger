@@ -1,6 +1,6 @@
 var rootPath = new File($.fileName).parent;
 $.evalFile(rootPath + '/node_modules/extendscript-logger/index.jsx');
-var logger = new Logger('DEBUG', rootPath+'/log/example.log');
+var logger = new Logger(rootPath+'/log/example.log');
 
 logger.debug('Debug message');
 logger.info([1, "Random string"]);

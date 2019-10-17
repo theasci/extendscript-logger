@@ -16,7 +16,7 @@ Add the following to code to any ExtendScript (`*.jsx`) file you want to have a 
 ```js
 var rootPath = new File($.fileName).parent;
 $.evalFile(rootPath + '/node_modules/extendscript-logger/index.jsx');
-var logger = new Logger('DEBUG', rootPath+'/log/test.log');
+var logger = new Logger(rootPath+'/log/test.log', 'DEBUG');
 ```
 
 # Usage
