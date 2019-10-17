@@ -21,7 +21,7 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
-    "jasminejsx": "git://github.com/theasci/jasminejsx.git#master"
+    "jasminejsx": "^0.0.2"
   },
   "author": "Shawn Pyle <shawn.pyle@the-jci.org>",
   "license": "MIT",
