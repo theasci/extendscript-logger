@@ -1,0 +1,32 @@
+{
+  "name": "extendscript-logger",
+  "version": "0.0.1",
+  "description": "Logging for Adobe ExtendScript capable applications.",
+  "main": "index.jsx",
+  "scripts": {
+    "test": "tests/run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theasci/extendscript-logger.git"
+  },
+  "keywords": [
+    "adobe",
+    "extendscript",
+    "logger",
+    "logging"
+  ],
+  "dependencies": {
+    "extendscript-es5-shim": "^0.2.0",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "jasminejsx": "git://github.com/theasci/jasminejsx.git#master"
+  },
+  "author": "Shawn Pyle <shawn.pyle@the-jci.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theasci/extendscript-logger/issues"
+  },
+  "homepage": "https://github.com/theasci/extendscript-logger#readme"
+}
