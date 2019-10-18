@@ -96,10 +96,30 @@ describe('Logger', function() {
 		});
 		
 		it('creates file if it does not exist',function(){
-			debugLogger.delete();
 			expect(debugLogger.file().exists).toBe(false);
 			expect(debugLogger.log('testing log','DEBUG')).toBe(true);
 			expect(debugLogger.file().exists).toBe(true);
+		});
+		
+		it('outputs to file', function(){
+			try {
+				//create a new logger so our file doesn't get clobbered by other tests.
+				var outputTestLogger = new Logger(rootPath + '/log/outputTest.log');
+				expect(outputTestLogger.log('entry in log','WARN')).toBe(true);
+
+				var r = new RegExp('^\d+|'+timeRegexp.source+'|WARN|entry in log\n');
+				expect(outputTestLogger.lastLog).toMatch(r);
+
+				var f = outputTestLogger.file();
+				expect(f.exists).toBe(true);
+				f.open('r');
+				expect(f.read()).toMatch(r)
+			} finally {
+				if(f && f.exists) {
+					f.close();
+					f.remove();
+				}
+			}
 		});
 	});
 	
