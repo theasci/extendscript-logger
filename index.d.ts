@@ -1,11 +1,14 @@
+type level = 'DEBUG' | 'INFO' | 'NOTICE' | 'WARN' | 'ERROR' | 'CRITICAL';
+
 declare class Logger {
+  constructor(logPath: string, severity: level)
   /**
    * Contains last logged message 
    */
   lastlog: string;
 
   /**
-   * ID of the log
+   * ID of current log
    */
   logId: number;
 
@@ -17,7 +20,14 @@ declare class Logger {
   /**
    * Possible levels of logs
    */
-  levels: ['DEBUG', 'INFO', 'NOTICE', 'WARN', 'ERROR', 'CRITICAL'];
+  levels: [
+    'DEBUG',
+    'INFO',
+    'NOTICE',
+    'WARN',
+    'ERROR',
+    'CRITICAL'
+  ];
 
   /**
    * Path to the file, where logs will be saved
@@ -27,7 +37,7 @@ declare class Logger {
   /**
    * Severity level
    */
-  severity: string;
+  severity: level;
 
   /**
    * Creates a log, and marks it as DEBUG
