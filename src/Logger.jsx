@@ -9,7 +9,6 @@
 if(!Logger) {
 	var Logger = (function(givenLogPath, givenLevel){
 		var _private = {
-			logId: 1,
 			logPath: givenLogPath || '/tmp/'+moment().format('YYYYMMDDHms')+'.log',
 			level: givenLevel || 'DEBUG',
 			levels: [
@@ -81,8 +80,7 @@ if(!Logger) {
 		}
 
 		this.messageString = function(message, level){
-			var msg = _private.logId;
-			msg += this.separator + moment().format('YYYY-MM-DDTHH:mm:SS');
+			var msg = moment().format('YYYY-MM-DDTHH:mm:SS');
 			msg += this.separator + level;
 			
 			if(typeof(message) == 'object') {
@@ -140,7 +138,6 @@ if(!Logger) {
 			this.lastLog = this.messageString(message,level);
 			file.writeln(this.lastLog);
 			file.close();
-			_private.logId += 1;
 			return true;
 		}
 		
