@@ -50,3 +50,4 @@ me@host extendscript-logger|master$ test/run
 1. Update `CHANGELOG.md` with changes since last release.
 1. Check them all into the repository.
 1. `npm publish` to deploy the release to npm.
+1. `git tag -a <version> -m <version>; git push --tags`
