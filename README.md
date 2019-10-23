@@ -23,8 +23,16 @@ var logger = new Logger(rootPath+'/log/test.log', 'DEBUG');
 
 Logger provides the following methods for logging output: debug, info, notice, warn, error, critical. 
 
-See the `script/example.jsx` file.
+```js
+var rootPath = new File($.fileName).parent;
+$.evalFile(rootPath + '/node_modules/extendscript-logger/index.jsx');
+var logger = new Logger(rootPath+'/log/example.log');
 
+logger.debug('Debug message');
+logger.info([1, "Random string"]);
+logger.notice({foo:"bar"});
+logger.error("Crap! Something went wrong.");
+```
 
 # Testing
 
