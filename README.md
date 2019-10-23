@@ -44,9 +44,9 @@ me@host extendscript-logger|master$ test/run
 
 # NPM Release Tasks
 
-1. Ensure tests pass.
 1. Update `package.json` version number
 1. `npm install` to update package lock.
+1. Ensure tests pass.
 1. Update `CHANGELOG.md` with changes since last release.
 1. Check them all into the repository.
 1. `npm publish` to deploy the release to npm.
