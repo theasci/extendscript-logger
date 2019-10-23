@@ -1,16 +1,12 @@
 type level = 'DEBUG' | 'INFO' | 'NOTICE' | 'WARN' | 'ERROR' | 'CRITICAL';
 
 declare class Logger {
-  constructor(logPath: string, severity: level)
+  constructor(givenLogPath: string, givenLevel: level);
+
   /**
    * Contains last logged message 
    */
   lastlog: string;
-
-  /**
-   * ID of current log
-   */
-  logId: number;
 
   /**
    * Separator, which separates texts in log output, default '|'
@@ -18,66 +14,65 @@ declare class Logger {
   separator: string;
 
   /**
-   * Possible levels of logs
+   * Returns path to log file
    */
-  levels: [
-    'DEBUG',
-    'INFO',
-    'NOTICE',
-    'WARN',
-    'ERROR',
-    'CRITICAL'
-  ];
+  logPath(): string;
 
   /**
-   * Path to the file, where logs will be saved
+   * Returns array of possible levels
    */
-  logPath: string;
-
+  levels(): string[];
+  
   /**
-   * Severity level
+   * Returns selected level
    */
-  severity: level;
+  level(): level;
 
   /**
    * Creates a log, and marks it as DEBUG
    * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
    */
-  debug(message: string);
+  debug(message: string): boolean;
 
   /**
    * Creates a log, and marks it as INFO
    * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
    */
-  info(message: string);
+  info(message: string): boolean;
 
   /**
    * Creates a log, and marks it as NOTICE
    * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
    */
-  notice(message: string);
+  notice(message: string): boolean;
 
   /**
    * Creates a log, and marks it as WARN
    * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
    */
-  warn(message: string);
+  warn(message: string): boolean;
 
   /**
    * Creates a log, and marks it as ERROR
    * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
    */
-  error(message: string);
+  error(message: string): boolean;
 
   /**
    * Creates a log, and marks it as CRITICAL
    * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
    */
-  critical(message: string);
+  critical(message: string): boolean;
 
   /**
    * Removes current log file immidiately
    */
-  delete()
+  delete();
 
 }
