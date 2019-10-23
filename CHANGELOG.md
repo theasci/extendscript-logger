@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 # 0.1.1 - 2019-10-23
 
-## Added TypeScript definitions by [@lumenn](https://github.com/lumenn)
+## Added
+
+1. TypeScript definitions by [@lumenn](https://github.com/lumenn)
 
 # 0.1.0 - 2019-10-21
 
