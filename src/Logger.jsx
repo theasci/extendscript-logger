@@ -3,130 +3,152 @@
  * @see https://github.com/sidpalas/extendscript-logging
  *
  * var logger = new Logger('~/mylog.log','DEBUG');
+ *
+ * Wrap definition to allow testing with jasminejsx which depends on this library.
  */
-var Logger = (function(logPath, severity){
-	this.lastLog = null;
-	this.logId = 1;
-	this.separator = '|';
-	this.levels = [
-		'DEBUG',
-		'INFO',
-		'NOTICE',
-		'WARN',
-		'ERROR',
-		'CRITICAL'
-	];
-	this.logPath = logPath ? logPath : '/tmp/'+moment().format('YYYYMMDDHms')+'.log';
-	this.severity = severity ? severity : 'DEBUG';
+if(!Logger) {
+	var Logger = (function(givenLogPath, givenLevel){
+		var _private = {
+			logPath: givenLogPath || '/tmp/'+moment().format('YYYYMMDDHms')+'.log',
+			level: givenLevel || 'DEBUG',
+			levels: [
+				'DEBUG',
+				'INFO',
+				'NOTICE',
+				'WARN',
+				'ERROR',
+				'CRITICAL',
+			],
+		};
 
-	this.debug = function(message) {
-		return this.log(message, 'DEBUG');
-	}
-	this.info = function(message) {
-		return this.log(message, 'INFO');
-	}
-	this.notice = function(message) {
-		return this.log(message, 'NOTICE');
-	}
-	this.warn = function(message) {
-		return this.log(message, 'WARN');
-	}
-	this.error = function(message) {
-		return this.log(message, 'ERROR');
-	}
-	this.critical = function(message) {
-		return this.log(message, 'CRITICAL');
-	}
-
-	/**
-	 * Convenience function to log exceptions from try-catch blocks.
-	 * Usually called as `catch(e){ logger.exception(e); }`
-	 * @param  Exception exception
-	 * @param  string fileName Originating file path
-	 * @return boolean
-	 */
-	this.exception = function(error, severity) {
-		//Undocumented error properties. This code borrowed from Jasmine's ExceptionFormatter
-		var msg = error.name + ': ' + error.message;
-		if (error.fileName || error.sourceURL) {
-			msg += ' in ' + (error.fileName || error.sourceURL);
-		}
-		if (error.line || error.lineNumber) {
-			msg += ' (line ' + (error.line || error.lineNumber) + ')';
-		}
-		return this.log(msg, severity || 'WARN');
-	}
-
-	this.messageString = function(message, severity){
-		var msg = this.logId;
-		msg += this.separator + moment().format('YYYY-MM-DDTHH:mm:SS');
-		msg += this.separator + severity;
+		/**
+		 * The last log is written to this variable for easy access.
+		 * 
+		 */
+		this.lastLog = null;
 		
-		if(typeof(message) == 'object') {
-			try {
-				msg += this.separator + JSON.stringify(message);
-			} catch(e){
-				//attempt to display ExtendScript object
-				if (e instanceof InternalError && message.properties) {
-					msg += this.separator + JSON.stringify(message.properties.toSource());
-				} else {
-					throw e;
-				}
+		this.separator = '|';
+		
+		this.logPath = function() {
+			return _private.logPath;
+		}
+		
+		this.levels = function() {
+			return _private.levels;
+		}
+		
+		this.level = function() {
+			return _private.level;
+		}
+
+		this.debug = function(message) {
+			return this.log(message, 'DEBUG');
+		}
+		this.info = function(message) {
+			return this.log(message, 'INFO');
+		}
+		this.notice = function(message) {
+			return this.log(message, 'NOTICE');
+		}
+		this.warn = function(message) {
+			return this.log(message, 'WARN');
+		}
+		this.error = function(message) {
+			return this.log(message, 'ERROR');
+		}
+		this.critical = function(message) {
+			return this.log(message, 'CRITICAL');
+		}
+
+		/**
+		 * Convenience function to log exceptions from try-catch blocks.
+		 * Usually called as `catch(e){ logger.exception(e); }`
+		 * @param  Exception exception
+		 * @param  string fileName Originating file path
+		 * @return boolean
+		 */
+		this.exception = function(error, level) {
+			//Undocumented error properties. This code borrowed from Jasmine's ExceptionFormatter
+			var msg = error.name + ': ' + error.message;
+			if (error.fileName || error.sourceURL) {
+				msg += ' in ' + (error.fileName || error.sourceURL);
 			}
-		} else {
-			msg += this.separator + message
+			if (error.line || error.lineNumber) {
+				msg += ' (line ' + (error.line || error.lineNumber) + ')';
+			}
+			return this.log(msg, level || 'WARN');
 		}
-		
-		return msg;
-	}
 
-	/**
-	 * Ensure file folder exists so we can create the log file.
-	 */
-	this.file = function() {
-		var logFile = new File(this.logPath)
-		if (!logFile.parent.exists){
-			logFile.parent.create();
+		this.messageString = function(message, level){
+			var msg = moment().format('YYYY-MM-DDTHH:mm:SS');
+			msg += this.separator + level;
+			
+			if(typeof(message) == 'object') {
+				try {
+					msg += this.separator + JSON.stringify(message);
+				} catch(e){
+					//attempt to display ExtendScript object
+					if (e instanceof InternalError && message.properties) {
+						msg += this.separator + JSON.stringify(message.properties.toSource());
+					} else {
+						throw e;
+					}
+				}
+			} else {
+				msg += this.separator + message
+			}
+			
+			return msg;
 		}
-		return logFile;
-	}
-	
-	/**
-	 * Determine if we should show a message at the given severity.
-	 * @param  string severity, one of this.levels
-	 * @return boolean
-	 */
-	this.meetsSeverity = function(severity) {
-		return this.levels.indexOf(severity) >= this.levels.indexOf(this.severity);
-	}
-	
-	this.log = function(message, severity) {
-		if(this.levels.indexOf(severity) == -1) {
-			throw new TypeError('Severity '+severity+' is not one of extendscript-logger.levels');
+
+		/**
+		 * Ensure file folder exists so we can create the log file.
+		 */
+		this.file = function() {
+			var logFile = new File(this.logPath())
+			if (!logFile.parent.exists){
+				logFile.parent.create();
+			}
+			return logFile;
 		}
 		
-		if(!this.meetsSeverity(severity)) {
-			return false;
+		/**
+		 * Compares two levels.
+		 * @param {String} comparisionLevel
+		 * @param {String} baseLevel
+		 * @return boolean
+		 */
+		this.meetsLevel = function(comparisionLevel, baseLevel) {
+			return _private.levels.indexOf(comparisionLevel) >= _private.levels.indexOf(baseLevel);
 		}
 		
-		var file = this.file();
-		file.open('a+');
-		file.encoding = 'UTF-8';
-		file.lineFeed = 'Unix';
-		this.lastLog = this.messageString(message,severity);
-		file.writeln(this.lastLog);
-		file.close();
-		this.logId += 1;
-		return true;
-	}
-	
-	/**
-	 * Deletes this log immediately. Useful in testing.
-	 * @return boolean
-	 */
-	this.delete = function() {
-		return this.file().remove();
-	}
-	
-	return this;
-}());
+		this.log = function(message, level) {
+			if(_private.levels.indexOf(level) == -1) {
+				throw new TypeError('Level '+level+' is not valid level');
+			}
+			
+			if(!this.meetsLevel(level, this.level())) {
+				return false;
+			}
+			
+			var file = this.file();
+			file.open('a+');
+			file.encoding = 'UTF-8';
+			file.lineFeed = 'Unix';
+			this.lastLog = this.messageString(message,level);
+			file.writeln(this.lastLog);
+			file.close();
+			return true;
+		}
+		
+		/**
+		 * Deletes this log immediately. Useful in testing.
+		 * @return boolean
+		 */
+		this.delete = function() {
+			return this.file().remove();
+		}
+		
+		return this;
+	}());
+}
