@@ -23,7 +23,7 @@
   "devDependencies": {
     "jasminejsx": "^0.0.2"
   },
-  "author": "Shawn Pyle <shawn.pyle@the-jci.org>",
+  "author": "Shawn Pyle <shawn.pyle@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/theasci/extendscript-logger/issues"
