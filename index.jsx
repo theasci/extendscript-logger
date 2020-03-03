@@ -1,10 +1,11 @@
-var projectRootPath = new File($.fileName).parent;
-var rootPath = rootPath || projectRootPath;
+var Global = Global || {};
+Global.extendscriptLoggerRootPath = new File($.fileName).parent;
+Global.rootPath = Global.rootPath || (typeof(rootPath) != 'undefined' ? rootPath : null) || Global.extendscriptLoggerRootPath;
 
 //Load dependencies
-$.evalFile(rootPath + '/node_modules/extendscript-es5-shim/index.js');
-$.evalFile(rootPath + '/node_modules/moment/moment.js');
+$.evalFile(Global.rootPath + '/node_modules/extendscript-es5-shim/index.js');
+$.evalFile(Global.rootPath + '/node_modules/moment/moment.js');
 
 //Load libraries
-$.evalFile(projectRootPath + '/lib/json2.js');
-$.evalFile(projectRootPath + '/src/Logger.jsx');
+$.evalFile(Global.extendscriptLoggerRootPath + '/lib/json2.js');
+$.evalFile(Global.extendscriptLoggerRootPath + '/src/Logger.jsx');

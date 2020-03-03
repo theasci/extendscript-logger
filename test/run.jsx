@@ -1,3 +1,4 @@
 //@include '../index.jsx'
-var logger = new Logger(rootPath+'/log/test.log');
-$.evalFile(rootPath + '/node_modules/jasminejsx/test/run.jsx');
+
+Global.logger = new Logger(Global.rootPath+'/log/test.log');
+$.evalFile(Global.rootPath + '/node_modules/jasminejsx/test/run.jsx');

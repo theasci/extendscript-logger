@@ -11,27 +11,26 @@ npm install extendscript-logger
 
 ```
 
-Add the following to code to any ExtendScript (`*.jsx`) file you want to have a Logger instance available.
+Add the following code to any ExtendScript (`*.jsx`) file you want to have a Logger instance available.
 
 ```js
-var rootPath = new File($.fileName).parent;
-$.evalFile(rootPath + '/node_modules/extendscript-logger/index.jsx');
-var logger = new Logger(rootPath+'/log/test.log', 'DEBUG');
+var Global = Global || {};
+Global.rootPath = new File($.fileName).parent;
+$.evalFile(Global.rootPath + '/node_modules/extendscript-logger/index.jsx');
+var Glogal.logger = new Logger(Global.rootPath+'/log/test.log', 'DEBUG');
 ```
 
 # Usage
 
-Logger provides the following methods for logging output: debug, info, notice, warn, error, critical. 
+Logger provides the following methods for logging output.
 
 ```js
-var rootPath = new File($.fileName).parent;
-$.evalFile(rootPath + '/node_modules/extendscript-logger/index.jsx');
-var logger = new Logger(rootPath+'/log/example.log');
-
-logger.debug('Debug message');
-logger.info([1, "Random string"]);
-logger.notice({foo:"bar"});
-logger.error("Crap! Something went wrong.");
+Glogal.logger.debug('Debug message');
+Glogal.logger.info([1, "Random string"]);
+Glogal.logger.notice({foo:"bar"});
+Glogal.logger.warn("Danger, Will Robinson!");
+Glogal.logger.error("Crap! Something went wrong.");
+Glogal.logger.critical("DEFCON 1! Seek shelter.");
 ```
 
 # Testing
@@ -42,12 +41,13 @@ Output should look like:
 
 ```
 me@host extendscript-logger|master$ test/run
-1|2019-10-17T14:41:28|INFO|***************************
-2|2019-10-17T14:41:28|INFO|Jasmine ExtendScript Runner
-3|2019-10-17T14:41:28|INFO|***************************
-4|2019-10-17T14:41:28|INFO|Loading all specs in ~/projects/extendscript-logger/test/spec
-5|2019-10-17T14:41:68|INFO|14 specs, 0 failures
-6|2019-10-17T14:41:68|INFO|Finished in 0.381 seconds
+2020-03-03T11:44:99|INFO|***************************
+2020-03-03T11:44:00|INFO|Jasmine ExtendScript Runner
+2020-03-03T11:44:00|INFO|***************************
+2020-03-03T11:44:00|WARN|To prevent odd errors, usually methods not being defined, login into Adobe Creative Cloud and verify all modal dialog boxes are closed. If tests are not running as expected, try restarting the application.
+2020-03-03T11:44:00|INFO|Loading all specs in /Users/spyle/projects/extendscript-logger/test/spec
+2020-03-03T11:44:49|INFO|20 specs, 0 failures
+2020-03-03T11:44:49|INFO|Finished in 0.469 seconds
 ```
 
 # NPM Release Tasks

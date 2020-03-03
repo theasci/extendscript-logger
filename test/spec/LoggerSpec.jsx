@@ -1,7 +1,7 @@
 describe('Logger', function() {
 	var timeRegexp = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
 	var debugLogger;
-	var debugLogPath = rootPath+'/log/debugLogger.log'
+	var debugLogPath = Global.rootPath+'/log/debugLogger.log'
 	
 	beforeEach(function(){
 		debugLogger = new Logger(debugLogPath);
@@ -26,7 +26,7 @@ describe('Logger', function() {
 		});
 		it('create directory if it does not exist', function(){
 			try {
-				var dir = new Folder(rootPath+'/log/test-dir');
+				var dir = new Folder(Global.rootPath+'/log/test-dir');
 				expect(dir.exists).toBe(false);
 	
 				var fooPath = dir.fullName+'/foo.log';
@@ -149,7 +149,7 @@ describe('Logger', function() {
 		it('outputs to file', function(){
 			try {
 				//create a new logger so our file doesn't get clobbered by other tests.
-				var outputTestLogger = new Logger(rootPath + '/log/outputTest.log');
+				var outputTestLogger = new Logger(Global.rootPath + '/log/outputTest.log');
 				expect(outputTestLogger.log('entry in log','WARN')).toBe(true);
 	
 				var r = new RegExp('^\d+|'+timeRegexp.source+'|WARN|entry in log\n');
