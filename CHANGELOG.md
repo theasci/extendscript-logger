@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
  
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.2.1 - 2020-03-03
+
+## Changed
+
+1. Updated [jasminejsx](https://github.com/theasci/jasminejsx) to version 0.2.0 to handle new `Global` object.
+
 # 0.2.0 - 2020-03-03
 
 ## Changed
