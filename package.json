@@ -1,6 +1,6 @@
 {
   "name": "extendscript-logger",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Logging for Adobe ExtendScript capable applications.",
   "main": "index.jsx",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "extendscript-repl": "0.0.3",
-    "jasminejsx": "^0.0.2"
+    "jasminejsx": "^0.1.0"
   },
   "author": "Shawn Pyle <shawn.pyle@gmail.com>",
   "license": "MIT",

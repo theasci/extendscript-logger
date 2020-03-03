@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
  
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.2.0 - 2020-03-03
+
+## Changed
+
+1. `index.jsx` will attempt to get the rootPath from a `Global.rootPath` before looking at a global `rootPath` variable. `README.md` has been updated accordingly.
+
+## Added
+
+1. Added `script/repl.sh` that uses [extendscript-repl](https://github.com/theasci/extendscript-repl) so that we can play around with and test values.
+
 # 0.1.1 - 2019-10-23
 
 ## Added
