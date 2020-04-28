@@ -17,7 +17,7 @@ Add the following code to any ExtendScript (`*.jsx`) file you want to have a Log
 var Global = Global || {};
 Global.rootPath = new File($.fileName).parent;
 $.evalFile(Global.rootPath + '/node_modules/extendscript-logger/index.jsx');
-var Global.logger = new Logger(Global.rootPath+'/log/test.log', 'DEBUG');
+Global.logger = new Logger(Global.rootPath+'/log/test.log', 'DEBUG');
 ```
 
 # Usage
