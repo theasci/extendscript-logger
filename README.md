@@ -17,7 +17,7 @@ Add the following code to any ExtendScript (`*.jsx`) file you want to have a Log
 var Global = Global || {};
 Global.rootPath = new File($.fileName).parent;
 $.evalFile(Global.rootPath + '/node_modules/extendscript-logger/index.jsx');
-var Glogal.logger = new Logger(Global.rootPath+'/log/test.log', 'DEBUG');
+var Global.logger = new Logger(Global.rootPath+'/log/test.log', 'DEBUG');
 ```
 
 # Usage
@@ -25,12 +25,12 @@ var Glogal.logger = new Logger(Global.rootPath+'/log/test.log', 'DEBUG');
 Logger provides the following methods for logging output.
 
 ```js
-Glogal.logger.debug('Debug message');
-Glogal.logger.info([1, "Random string"]);
-Glogal.logger.notice({foo:"bar"});
-Glogal.logger.warn("Danger, Will Robinson!");
-Glogal.logger.error("Crap! Something went wrong.");
-Glogal.logger.critical("DEFCON 1! Seek shelter.");
+Global.logger.debug('Debug message');
+Global.logger.info([1, "Random string"]);
+Global.logger.notice({foo:"bar"});
+Global.logger.warn("Danger, Will Robinson!");
+Global.logger.error("Crap! Something went wrong.");
+Global.logger.critical("DEFCON 1! Seek shelter.");
 ```
 
 # Testing
