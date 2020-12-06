@@ -84,7 +84,7 @@ var Logger = Logger || (function Logger(givenLogPath, givenLevel){
 	}
 	
 	this.messageString = function(message, level){
-		var msg = moment().format('YYYY-MM-DDTHH:mm:SS');
+		var msg = moment().format('YYYY-MM-DDTHH:mm:ss');
 		msg += this.separator + level;
 	
 		if(typeof(message) == 'object') {

@@ -1,6 +1,6 @@
 {
   "name": "extendscript-logger",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Logging for Adobe ExtendScript capable applications.",
   "main": "index.jsx",
   "scripts": {
