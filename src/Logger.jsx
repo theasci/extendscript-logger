@@ -14,6 +14,7 @@ var Logger = Logger || (function Logger(givenLogPath, givenLevel){
 			'DEBUG',
 			'INFO',
 			'NOTICE',
+			'VALID',
 			'WARN',
 			'ERROR',
 			'CRITICAL',
@@ -53,6 +54,9 @@ var Logger = Logger || (function Logger(givenLogPath, givenLevel){
 	}
 	this.notice = function(message) {
 		return this.log(message, 'NOTICE');
+	}
+	this.notice = function(message) {
+		return this.log(message, 'VALID');
 	}
 	this.warn = function(message) {
 		return this.log(message, 'WARN');

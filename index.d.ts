@@ -50,6 +50,13 @@ declare class Logger {
   notice(message: string): boolean;
 
   /**
+   * Creates a log, and marks it as VALID
+   * @param message Message to log
+   * @returns true if message was logged, false if it wasn't
+   */
+  valid(message: string): boolean;
+
+  /**
    * Creates a log, and marks it as WARN
    * @param message Message to log
    * @returns true if message was logged, false if it wasn't

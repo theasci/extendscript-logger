@@ -84,6 +84,15 @@ describe('Logger', function() {
 			}
 		});
 		
+		it('VALID', function(){
+			for(i = 0; i < 2; i++) {
+				expect(lgr.meetsLevel(lgr.levels()[i], 'VALID')).toBe(false);
+			}
+			for(i = 2; i < lgr.levels().length; i++) {
+				expect(lgr.meetsLevel(lgr.levels()[i], 'VALID')).toBe(true);
+			}
+		});
+		
 		it('WARN', function(){
 			for(i = 0; i < 3; i++) {
 				expect(lgr.meetsLevel(lgr.levels()[i], 'WARN')).toBe(false);
