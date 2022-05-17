@@ -28,6 +28,7 @@ Logger provides the following methods for logging output.
 Global.logger.debug('Debug message');
 Global.logger.info([1, "Random string"]);
 Global.logger.notice({foo:"bar"});
+Global.logger.valid('Validations complete.');
 Global.logger.warn("Danger, Will Robinson!");
 Global.logger.error("Crap! Something went wrong.");
 Global.logger.critical("DEFCON 1! Seek shelter.");
