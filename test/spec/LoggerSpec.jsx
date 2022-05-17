@@ -9,7 +9,7 @@ describe('Logger', function() {
 	});
 
 	it('levels', function() {
-		expect(debugLogger.levels().length).toEqual(6);
+		expect(debugLogger.levels().length).toEqual(7);
 	});
 	
 	it('level', function() {
@@ -84,29 +84,38 @@ describe('Logger', function() {
 			}
 		});
 		
-		it('WARN', function(){
+		it('VALID', function(){
 			for(i = 0; i < 3; i++) {
-				expect(lgr.meetsLevel(lgr.levels()[i], 'WARN')).toBe(false);
+				expect(lgr.meetsLevel(lgr.levels()[i], 'VALID')).toBe(false);
 			}
 			for(i = 3; i < lgr.levels().length; i++) {
+				expect(lgr.meetsLevel(lgr.levels()[i], 'VALID')).toBe(true);
+			}
+		});
+		
+		it('WARN', function(){
+			for(i = 0; i < 4; i++) {
+				expect(lgr.meetsLevel(lgr.levels()[i], 'WARN')).toBe(false);
+			}
+			for(i = 4; i < lgr.levels().length; i++) {
 				expect(lgr.meetsLevel(lgr.levels()[i], 'WARN')).toBe(true);
 			}
 		});
 		
 		it('ERROR', function(){
-			for(i = 0; i < 4; i++) {
+			for(i = 0; i < 5; i++) {
 				expect(lgr.meetsLevel(lgr.levels()[i], 'ERROR')).toBe(false);
 			}
-			for(i = 4; i < lgr.levels().length; i++) {
+			for(i = 5; i < lgr.levels().length; i++) {
 				expect(lgr.meetsLevel(lgr.levels()[i], 'ERROR')).toBe(true);
 			}
 		});
 		
 		it('CRITICAL', function(){
-			for(i = 0; i < 5; i++) {
+			for(i = 0; i < 6; i++) {
 				expect(lgr.meetsLevel(lgr.levels()[i], 'CRITICAL')).toBe(false);
 			}
-			for(i = 5; i < lgr.levels().length; i++) {
+			for(i = 6; i < lgr.levels().length; i++) {
 				expect(lgr.meetsLevel(lgr.levels()[i], 'CRITICAL')).toBe(true);
 			}
 		});
